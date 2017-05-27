@@ -144,6 +144,14 @@ public abstract class Worker {
         this.startDate = startDate;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
     public static Integer nextId(Integer currID) {
         if (currID == null) {
             idCounter++;

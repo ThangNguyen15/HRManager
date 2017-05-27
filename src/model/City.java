@@ -20,7 +20,6 @@ import domainapp.basics.util.Tuple;
  * @author dmle
  *
  */
-@DClass(schema="courseman")
 public class City {
 
     @DAttr(name="id",id=true,auto=true,length=3,mutable=false,optional=false,type=Type.Integer)

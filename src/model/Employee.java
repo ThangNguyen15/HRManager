@@ -30,12 +30,6 @@ public class Employee extends Worker {
             associate = @DAssoc.Associate(type = PerformanceReport.class, cardMin = 1, cardMax = 1))
     private PerformanceReport performanceReport;
 
-    @DAttr(name = "salaryReport", type = DAttr.Type.Domain, length = 20, optional = true)
-    @DAssoc(ascName = "salaryReport-has-employee", role = "employee",
-            ascType = DAssoc.AssocType.One2Many, endType = DAssoc.AssocEndType.Many,
-            associate = @DAssoc.Associate(type = SalaryReport.class, cardMin = 1, cardMax = 1))
-    private SalaryReport salaryReport;
-
     @DAttr(name = "salary", type = DAttr.Type.Domain, optional = true, mutable = false)
     @DAssoc(ascName = "employee-has-salary", role = "employee", ascType = DAssoc.AssocType.Many2Many,
             endType = DAssoc.AssocEndType.Many, associate = @DAssoc.Associate(type = Salary.class, cardMin = 1, cardMax = MetaConstants.CARD_MORE))
@@ -43,25 +37,22 @@ public class Employee extends Worker {
 
     public Employee(String name, String email, City address, String phoneNumber, String startDate, Task task, Position position,
                     Attendance attendance, Department department, PerformanceReport performanceReport,
-                    SalaryReport salaryReport, Salary salary) {
+                    Salary salary) {
         super(name, email, address, phoneNumber, startDate, task);
         this.position = position;
         this.attendance = attendance;
         this.department = department;
         this.performanceReport = performanceReport;
-        this.salaryReport = salaryReport;
         this.salary = salary;
     }
 
     public Employee(Integer id, String name, String email, City address, String phoneNumber, String startDate, Task task, Position position,
-                    Attendance attendance, Department department, PerformanceReport performanceReport,
-                    SalaryReport salaryReport, Salary salary) {
+                    Attendance attendance, Department department, PerformanceReport performanceReport, Salary salary) {
         super(id, name, email, address, phoneNumber, startDate, task);
         this.position = position;
         this.attendance = attendance;
         this.department = department;
         this.performanceReport = performanceReport;
-        this.salaryReport = salaryReport;
         this.salary = salary;
     }
 
@@ -95,14 +86,6 @@ public class Employee extends Worker {
 
     public void setPerformanceReport(PerformanceReport performanceReport) {
         this.performanceReport = performanceReport;
-    }
-
-    public SalaryReport getSalaryReport() {
-        return salaryReport;
-    }
-
-    public void setSalaryReport(SalaryReport salaryReport) {
-        this.salaryReport = salaryReport;
     }
 
     public Salary getSalary() {

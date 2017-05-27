@@ -19,14 +19,6 @@ public class SalaryReport {
     @DAttr(name = "month", type = DAttr.Type.String, length = 20, optional = false, mutable = true)
     private String month;
 
-    @DAttr(name = "employees", type = DAttr.Type.Collection, optional = false,
-            serialisable = false, filter = @Select(clazz = Employee.class))
-    @DAssoc(ascName = "salaryReport-has-employee", role = "salaryReport",
-            ascType = DAssoc.AssocType.One2Many, endType = DAssoc.AssocEndType.One,
-            associate = @DAssoc.Associate(type = Employee.class, cardMin = 1, cardMax = MetaConstants.CARD_MORE))
-    private List<Employee> employees;
-    private int employeesCount;
-
     @DAttr(name = "salaries", type = DAttr.Type.Collection, optional = true,
             serialisable = false, filter = @Select(clazz = Salary.class))
     @DAssoc(ascName = "salaryReport-has-salary", role = "salaryReport",
@@ -51,8 +43,6 @@ public class SalaryReport {
         this.month = month;
         this.totalSalary = (totalSalary != null) ? totalSalary : 0;
 
-        employees = new ArrayList<>();
-
         salaries = new ArrayList<>();
     }
 
@@ -73,81 +63,7 @@ public class SalaryReport {
         return totalSalary;
     }
 
-    //Report has many employees
-    @DOpt(type = DOpt.Type.LinkAdder)
-    // only need to do this for reflexive DAssoc:
-    // @MemberRef(name="employee")
-    public boolean addEmployee(Employee employee) {
-        if (!this.employees.contains(employee)) {
-            employees.add(employee);
-            updateTotalCost(employee);
-        }
-        return true;
-    }
-
-    @DOpt(type = DOpt.Type.LinkAdderNew)
-    public boolean addNewEmployee(Employee employee) {
-        employees.add(employee);
-        employeesCount++;
-        updateTotalCost(employee);
-        return true;
-    }
-
-    @DOpt(type = DOpt.Type.LinkAdder)
-    public boolean addPerformance(List<Employee> employees) {
-        for (Employee employee : employees) {
-            if (!this.employees.contains(employee)) {
-                this.employees.add(employee);
-                updateTotalCost(employees);
-            }
-        }
-
-        return true;
-    }
-
-    @DOpt(type = DOpt.Type.LinkAdderNew)
-    public boolean addNewEmployee(List<Employee> employees) {
-        this.employees.addAll(employees);
-        employeesCount += employees.size();
-        updateTotalCost(employees);
-        // no other attributes changed
-        return true;
-    }
-
-    @DOpt(type = DOpt.Type.LinkRemover)
-    //only need to do this for reflexive DAssoc: @MemberRef(name="employees")
-    public boolean removeEmployee(Employee employee) {
-        boolean removed = employees.remove(employee);
-
-        if (removed) {
-            updateTotalCost(employee);
-            employeesCount--;
-        }
-
-        // no other attributes changed
-        return true;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-        employeesCount = employees.size();
-    }
-
-    public List<Employee> getEmployees() {
-        return this.employees;
-    }
-
-    @DOpt(type = DOpt.Type.LinkCountGetter)
-    public int getEmployeesCount() {
-        return employeesCount;
-    }
-
-    @DOpt(type = DOpt.Type.LinkCountSetter)
-    public void setEmployeesCount(int employeesCount) {
-        this.employeesCount = employeesCount;
-    }
-
-    //Report has many attendances
+        //Report has many attendances
     @DOpt(type = DOpt.Type.LinkAdder)
     // only need to do this for reflexive DAssoc:
     // @MemberRef(name="attendance")
