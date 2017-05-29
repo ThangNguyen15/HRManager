@@ -14,7 +14,7 @@ import domainapp.basics.util.Tuple;
 /**
  * Represents a employee department.
  *
- * @author dmle
+ * @author ThangNguyen
  */
 
 public class Department {

@@ -17,7 +17,7 @@ import domainapp.basics.util.Tuple;
  * return the string representation of a city name which is expected by
  * the application.
  *
- * @author dmle
+ * @author baorv <roanvanbao@gmail.com>
  *
  */
 public class City {

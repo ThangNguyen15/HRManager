@@ -14,13 +14,13 @@ public class Question {
     private int id;
     private static int idCounter;
 
-    @DAttr(name = "name", type = DAttr.Type.String, optional = false)
+    @DAttr(name = "name", length = 50, type = DAttr.Type.String, optional = false)
     private String name;
     
-    @DAttr(name = "content", type = DAttr.Type.String, optional = false)
+    @DAttr(name = "content", length = 1000, type = DAttr.Type.String, optional = false)
     private String content;
 
-    @DAttr(name = "answer", type = DAttr.Type.String, optional = false)
+    @DAttr(name = "answer", length = 1000, type = DAttr.Type.String, optional = false)
     private String answer;
 
 

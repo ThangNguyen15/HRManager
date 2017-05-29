@@ -16,10 +16,10 @@ public class Task {
     private int id;
     private static int idCounter;
 
-    @DAttr(name = "name", type = DAttr.Type.String, optional = false)
+    @DAttr(name = "name", length = 50, type = DAttr.Type.String, optional = false)
     private String name;
     
-    @DAttr(name = "content", type = DAttr.Type.String, optional = false)
+    @DAttr(name = "content", length = 250, type = DAttr.Type.String, optional = false)
     private String content;
     
     @DAttr(name = "worker", type = DAttr.Type.Domain, serialisable = false)
@@ -64,6 +64,11 @@ public class Task {
     public Task(String name, String content, Worker worker, String startDate, String completeDate){
         this(null, name, content, worker, startDate, completeDate);
     }
+
+    public int getId() {
+        return id;
+    }
+
     /**
      * Set name
      * @param name

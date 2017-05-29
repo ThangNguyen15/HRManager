@@ -56,7 +56,7 @@ public class Salary {
         if (employee.getPosition().getName().equals("Director")) {
             baseSalary = 80;
         }
-        else if (employee.getPosition().getName().equals("Head of Deparment")) {
+        else if (employee.getPosition().getName().equals("Head of Department")) {
             baseSalary = 65;
         }
         else if (employee.getPosition().getName().equals("Team Leader")) {
